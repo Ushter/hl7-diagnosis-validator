@@ -13,10 +13,10 @@ end
 -- The caller owns the open connection; this helper neither opens nor closes it.
 function Lookup.find(connection, code)
    -- The table sequence defines precedence when a code occurs in both sources.
-   for _, tableName in ipairs({'DG_Codes_1500', 'DG_Codes_72500'}) do
+   for _, tableName in ipairs({'diagnosis_primary', 'diagnosis_secondary'}) do
       local rows = connection:query{
-         sql = 'SELECT DG_Description FROM ' .. tableName ..
-            ' WHERE DG_Codes = ' .. quote(code),
+         sql = 'SELECT description FROM ' .. tableName ..
+            ' WHERE code = ' .. quote(code),
          live = true
       }
       if #rows > 0 then

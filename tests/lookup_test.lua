@@ -4,8 +4,8 @@ local queries = {}
 local connection = {}
 function connection:query(options)
    queries[#queries + 1] = options.sql
-   if options.sql:find('DG_Codes_72500', 1, true) then
-      return {{DG_Description = 'Synthetic description'}}
+   if options.sql:find('diagnosis_secondary', 1, true) then
+      return {{description = 'Synthetic description'}}
    end
    return {}
 end
@@ -15,7 +15,7 @@ assert(queries[1]:find("TEST''CODE", 1, true))
 queries = {}
 function connection:query(options)
    queries[#queries + 1] = options.sql
-   return {{DG_Description = 'Synthetic description'}}
+   return {{description = 'Synthetic description'}}
 end
 assert(lookup.find(connection, 'TEST-CODE'))
 assert(#queries == 1)
